@@ -1,0 +1,900 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"
+        href="C:\Users\UserLAnd\Documents\FILE RAHASIA\JANGAN DIBUKA\Website\Saturn\testing\source\style\backbotside.css">
+    <link rel="stylesheet"
+        href="C:\Users\UserLAnd\Documents\FILE RAHASIA\JANGAN DIBUKA\Website\Saturn\testing\source\style\headerGlobal.css">
+    <script
+        src="C:\Users\UserLAnd\Documents\FILE RAHASIA\JANGAN DIBUKA\Website\Saturn\testing\source\script\backbotside.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.co m/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            overscroll-behavior: none;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-content {
+            flex: 1;
+        }
+
+        /* === Scrollbar (hidden) === */
+        body::-webkit-scrollbar,
+        body::-webkit-scrollbar-track,
+        body::-webkit-scrollbar-thumb,
+        body::-webkit-scrollbar-button {
+            display: none;
+            background: transparent;
+        }
+
+        /* === Background Elements === */
+        .background {
+            position: fixed;
+            z-index: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .box-right,
+        .box-left {
+            position: fixed;
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4));
+            border: 3px solid rgba(102, 126, 234, 0.6);
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(102, 126, 234, 0.4);
+            z-index: 0;
+        }
+
+        .box-right {
+            right: -80px;
+            animation: moveUpDownRotate 30s linear infinite;
+        }
+
+        .box-left {
+            left: -80px;
+            animation: moveDownUpRotate 30s linear infinite;
+        }
+
+        @keyframes moveUpDownRotate {
+            0% {
+                top: 100vh;
+                transform: rotate(0deg);
+            }
+
+            50% {
+                top: -250px;
+                transform: rotate(360deg);
+            }
+
+            100% {
+                top: 100vh;
+                transform: rotate(720deg);
+            }
+        }
+
+        @keyframes moveDownUpRotate {
+            0% {
+                top: -250px;
+                transform: rotate(0deg);
+            }
+
+            50% {
+                top: 100vh;
+                transform: rotate(360deg);
+            }
+
+            100% {
+                top: -250px;
+                transform: rotate(720deg);
+            }
+        }
+
+        .grid-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.5;
+        }
+
+        /* === Hamburger Menu Icon === */
+        .menu-icon {
+            width: 35px;
+            height: 27px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 50;
+        }
+
+        .menu-icon .line-1,
+        .menu-icon .line-2,
+        .menu-icon .line-3 {
+            height: 3px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 2px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.2s ease;
+        }
+
+        .no-animation {
+            animation: none !important;
+        }
+
+        /* Animasi hamburger → X */
+        .menu-icon.active .line-1 {
+            animation: animate-line-1 0.4s cubic-bezier(0.3, 1, 0.7, 1) forwards;
+        }
+
+        .menu-icon.active .line-2 {
+            animation: animate-line-2 0.4s cubic-bezier(0.3, 1, 0.7, 1) forwards;
+        }
+
+        .menu-icon.active .line-3 {
+            animation: animate-line-3 0.4s cubic-bezier(0.3, 1, 0.7, 1) forwards;
+        }
+
+        @keyframes animate-line-1 {
+            0% {
+                transform: translate3d(0, 0, 0) rotate(0);
+            }
+
+            50% {
+                transform: translate3d(0, 9px, 0) rotate(0);
+            }
+
+            100% {
+                transform: translate3d(0, 9px, 0) rotate(45deg);
+            }
+        }
+
+        @keyframes animate-line-2 {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes animate-line-3 {
+            0% {
+                transform: translate3d(0, 0, 0) rotate(0);
+            }
+
+            50% {
+                transform: translate3d(0, -15px, 0) rotate(0);
+            }
+
+            100% {
+                transform: translate3d(0, -15px, 0) rotate(135deg);
+            }
+        }
+
+        /* Reverse anim (opsional) */
+        .menu-icon .line-1 {
+            animation: animate-line-1-rev 0.7s ease-in-out;
+        }
+
+        .menu-icon .line-2 {
+            animation: animate-line-2-rev 0.7s ease-in-out;
+        }
+
+        .menu-icon .line-3 {
+            animation: animate-line-3-rev 0.7s ease-in-out;
+        }
+
+        @keyframes animate-line-1-rev {
+            0% {
+                transform: translate3d(0, 9px, 0) rotate(45deg);
+            }
+
+            50% {
+                transform: translate3d(0, 9px, 0) rotate(0);
+            }
+
+            100% {
+                transform: translate3d(0, 0, 0) rotate(0);
+            }
+        }
+
+        @keyframes animate-line-2-rev {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes animate-line-3-rev {
+            0% {
+                transform: translate3d(0, -9px, 0) rotate(135deg);
+            }
+
+            50% {
+                transform: translate3d(0, -9px, 0) rotate(0);
+            }
+
+            100% {
+                transform: translate3d(0, 0, 0) rotate(0);
+            }
+        }
+
+        /* === Sidebar === */
+        .sidebar {
+            position: fixed;
+            left: -320px;
+            width: 280px;
+            top: 64px;
+            height: 90vh;
+            background: rgba(19, 19, 39, 0.5);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            z-index: 2000;
+            transition: transform 0.4s cubic-bezier(0.3, 1, 0.7, 1);
+        }
+
+        .sidebar.open {
+            transform: translateX(320px);
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nav-link {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 12px 16px;
+            border-radius: 10px;
+            transition: all 0.2s;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link i {
+            width: 20px;
+            text-align: center;
+            margin-right: 12px;
+            color: #a0a0c0;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            transform: translateX(4px);
+        }
+
+        .nav-link:hover i {
+            color: #667eea;
+        }
+
+        .nav-link.active {
+            background: rgba(102, 126, 234, 0.3);
+            color: #d1daff;
+            font-weight: 600;
+            border-left: 3px solid #667eea;
+        }
+
+        .nav-link.active i {
+            color: #667eea;
+        }
+
+        /* === Sidebar Overlay === */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 0;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(3px);
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 1999;
+        }
+
+        /* === Footer / Bottom === */
+        .footer-container {
+            position: static;
+            width: 100%;
+            background: var(--color-bg-header);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-top: 1px solid var(--color-border);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            padding: 1.5rem 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-column h4 {
+            color: var(--color-text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--color-icon-active);
+        }
+
+        .footer-column p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .btn-discord {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #6c5ce7;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .btn-discord:hover {
+            background: #5d4dc5;
+            transform: translateY(-1px);
+        }
+
+        .btn-discord i {
+            font-size: 1.1rem;
+        }
+
+        /* === Responsif (Mobile) === */
+        @media (max-width: 768px) {
+
+            .box-right,
+            .box-left {
+                width: 180px;
+                height: 180px;
+                right: -60px;
+                left: -60px;
+            }
+
+            .header {
+                padding: 0.8rem 1rem;
+            }
+
+            .header-title {
+                font-size: 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .footer-column h4 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <style>
+        /* === Header === */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10vh;
+            background: rgba(19, 19, 39, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            z-index: 2000;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: transform 0.3s ease;
+        }
+
+        .header.hide {
+            transform: translateY(-100%);
+        }
+
+        .header .icon img {
+            height: 80%;
+            width: 40px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .header-title {
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+            text-align: center;
+            flex-grow: 1;
+            letter-spacing: 0.5px;
+        }
+    </style>
+    <script>
+        // ==== Background & Header & Sidebar (HTML) ====
+
+        const headerGlobal = `
+        <header class="header" id="smartHeader">
+        <div class="menu-icon">
+                <div class="line-1 no-animation"></div>
+                <div class="line-2 no-animation"></div>
+                <div class="line-3 no-animation"></div>
+            </div>
+            <h1 class="header-title"></h1>
+            <div class="icon">
+                <img src="https://saturn.web.id/img/saturnwhiteicon.png" alt="Saturn Logo" />
+            </div>
+        </header>
+`;
+
+        const headerHome = `
+        <header class="header" id="smartHeader">
+        <div class="menu-icon">
+                <div class="line-1 no-animation"></div>
+                <div class="line-2 no-animation"></div>
+                <div class="line-3 no-animation"></div>
+            </div>
+            <h1 class="header-title"></h1>
+            <div class="icon">
+                <img src="https://saturn.web.id/img/saturnwhiteicon.png" alt="Saturn Logo" />
+            </div>
+        </header>
+`;
+        const htmlBackgroundSidebar = `
+<div class="background">
+            <div class="box-right"></div>
+            <div class="box-left"></div>
+            <div class="grid-pattern"></div>
+        </div>
+
+        <aside class="sidebar" id="sidebar">
+        <nav class="sidebar-nav">
+                <a href="/" class="nav-link" id="home">
+                    <i class="fa-solid fas fa-home"></i> Home
+                </a>
+                <a href="/executor" class="nav-link" id="executorHub">
+                    <i class="fa-solid fas fa-rocket"></i> Executor
+                </a>
+                <a href="/searchscript" class="nav-link" id="scriptSearcher">
+                    <i class="fa-solid fas fa-search"></i> Script Searcher
+                </a>
+                <a href="/api" class="nav-link">
+                    <i class="fa-solid fas fa-code" id="api"></i> API
+                </a>
+                <a href="/docs" class="nav-link">
+                    <i class="fa-solid fas fa-book"></i> Docs
+                </a>
+                <a href="/discord" class="nav-link">
+                    <i class="fa-solid fab fa-discord"></i> Discord
+                </a>
+            </nav>
+        </aside>
+
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+`;
+
+        // ==== Bottom (HTML) ====
+
+        const bottom = `
+        <footer class="footer-container">
+        <div class="footer-content">
+        <div class="footer-column">
+                <h4>Social Media</h4>
+                <ul>
+                    <li><a href="https://www.tiktok.com/@saturnblox777"><i class="fa-brands fas fa-tiktok"></i>ㅤTiktok</a></li>
+                    <li><a href="https://www.youtube.com/@saturnbloxscript"><i class="fa-brands fas fa-youtube"></i>ㅤYoutube</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Page</h4>
+                <ul>
+                    <li><a href="/"><i class="fa-solid fas fa-home"></i>ㅤHome</a></li>
+                    <li><a href="/executor"><i class="fa-solid fas fa-rocket"></i>ㅤExecutor</a></li>
+                    <li><a href="/searchscript"><i class="fa-solid fas fa-search"></i>ㅤScript Searcher</a></li>
+                    <li><a href="/"><i class="fa-solid fas fa-book"></i>ㅤDocs</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>API</h4>
+                <ul>
+                    <li><a href="/api"><i class="fa-solid fas fa-code"></i>ㅤAPI</a></li>
+                    <li><a href="/exampleapicode"><i class="fa-solid fas fa-book"></i>ㅤExample API Code</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Discord</h4>
+                <p>join our discord server to get the latest updates and news about executor.</p>
+                <a href="/discord" class="btn-discord"><i class="fa-solid fab fa-discord"></i> Join Discord</a>
+            </div>
+        </div>
+    </footer>
+    `;
+
+        const path = location.pathname;
+        function getPathKey(path) {
+            if (path === "/") return "/";
+            if (path.includes("/executor")) return "executor";
+            if (path.includes("/searchscript")) return "searchscript";
+            if (path.includes("/api")) return "api";
+            return null;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const pathMap = {
+                "/": {
+                    id: "home",
+                    title: "Home"
+                },
+                "executor": {
+                    id: "executorHub",
+                    title: "Executor Hub"
+                },
+                "searchscript": {
+                    id: "scriptSearcher",
+                    title: "Script Searcher"
+                },
+                "api": {
+                    id: "api",
+                    title: "API"
+                }
+            };
+
+            const rawPath = location.pathname;
+            const key = getPathKey(rawPath);
+            const page = pathMap[key] || pathMap["/"];
+            const cssone = document.createElement('link');
+            cssone.rel = 'stylesheet';
+            cssone.type = 'text/css';
+            cssone.href = '../source/style/backbotside.css';
+            const font = document.createElement('link');
+            font.rel = 'stylesheet';
+            font.type = 'text/css';
+            font.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+            document.head.appendChild(cssone);
+            document.head.appendChild(font);
+
+            if (key === "/") {
+                const csstwo = document.createElement('link');
+                csstwo.rel = 'stylesheet';
+                csstwo.type = 'text/css';
+                csstwo.href = '../source/style/headerHome.css';
+                document.head.appendChild(csstwo)
+                document.body.insertAdjacentHTML("afterbegin", headerHome);
+            } else {
+                const csstwo = document.createElement('link');
+                csstwo.rel = 'stylesheet';
+                csstwo.type = 'text/css';
+                csstwo.href = '../source/style/headerGlobal.css';
+                document.head.appendChild(csstwo)
+                document.body.insertAdjacentHTML("afterbegin", headerGlobal);
+            }
+
+            document.body.insertAdjacentHTML("afterbegin", htmlBackgroundSidebar);
+
+            const headerTitleEl = document.querySelector(".header h1");
+            if (headerTitleEl) {
+                headerTitleEl.textContent = page.title;
+            }
+
+            const activeLink = document.getElementById(page.id);
+            if (activeLink) {
+                activeLink.classList.add("active");
+            }
+
+            document.body.insertAdjacentHTML("beforeend", bottom);
+
+            const header = document.getElementById('smartHeader');
+            const menu = document.querySelector('.menu-icon');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+
+            let lastScrollY = 20;
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > lastScrollY && window.scrollY > 20) {
+                    header?.classList.add('hide');
+                } else if (window.scrollY < lastScrollY || window.scrollY <= 20) {
+                    header?.classList.remove('hide');
+                }
+                lastScrollY = window.scrollY;
+            });
+
+            function openSidebar() {
+                sidebar.classList.add('open');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeSidebar() {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+                menu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            menu?.addEventListener('click', () => {
+                menu.classList.toggle('active');
+                if (menu.classList.contains('active')) {
+                    openSidebar();
+                    document.querySelectorAll('.menu-icon .line-1, .menu-icon .line-2, .menu-icon .line-3')
+                        .forEach(el => el.classList.remove('no-animation'));
+                } else {
+                    closeSidebar();
+                }
+            });
+
+            overlay?.addEventListener('click', closeSidebar);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+                    closeSidebar();
+                }
+            });
+        });
+
+
+        // ==== Background ====
+
+        let lastScrollY = 20;
+        const header = document.getElementById('smartHeader');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && window.scrollY > 20) {
+                header.classList.add('hide');
+            } else if (window.scrollY < lastScrollY || window.scrollY <= 20) {
+                header.classList.remove('hide');
+            }
+            lastScrollY = window.scrollY;
+        });
+
+        // ==== SideBar ====
+
+        const menu = document.querySelector('.menu-icon');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        function openSidebar() {
+            sidebar.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            menu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        menu.addEventListener('click', () => {
+            menu.classList.toggle('active');
+            if (menu.classList.contains('active')) {
+                openSidebar();
+                document.querySelectorAll('.menu-icon .line-1, .menu-icon .line-2, .menu-icon .line-3')
+                    .forEach(el => el.classList.remove('no-animation'));
+            } else {
+                closeSidebar();
+            }
+        });
+
+        overlay.addEventListener('click', closeSidebar);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+                closeSidebar();
+            }
+        });
+
+        // ==== Other ====
+        const visitorIdCheck = localStorage.getItem('visitorId')
+        if (visitorIdCheck != "1761458110677") {
+            var script1 = document.createElement('script');
+            script1.src = '/source/antiskidcode/index.js';
+            script1.type = 'text/javascript';
+            document.head.appendChild(script1);
+        }
+
+        const ahay = {}
+
+        function getWIBTime() {
+            const date = new Date();
+            const options = { timeZone: 'Asia/Jakarta', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            return ahay["date"] = date.toLocaleString('id-ID', options).replace(',', '');
+        }
+
+        function generateVisitorId() {
+            return Date.now();
+        }
+
+        function getPlatform() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            if (userAgent.includes('mobile')) {
+                return ahay["platform"] = 'HP';
+            } else if (userAgent.includes('windows') || userAgent.includes('linux') || userAgent.includes('mac')) {
+                return ahay["platform"] = 'Laptop/PC';
+            } else {
+                return ahay["platform"] = 'Unknown';
+            }
+        }
+
+        function getOS() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            if (userAgent.includes('android')) {
+                return ahay["os"] = 'Android';
+            } else if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
+                return ahay["os"] = 'iOS';
+            } else if (userAgent.includes('windows')) {
+                return ahay["os"] = 'Windows';
+            } else if (userAgent.includes('linux')) {
+                return ahay["os"] = 'Linux';
+            } else if (userAgent.includes('mac')) {
+                return ahay["os"] = 'MacOS';
+            } else {
+                return ahay["os"] = 'Unknown';
+            }
+        }
+
+        function fetchData() {
+            let visitorId = localStorage.getItem('visitorId');
+            if (!visitorId) {
+                visitorId = generateVisitorId();
+                localStorage.setItem('visitorId', visitorId);
+            }
+            let visitorCount = localStorage.getItem('visitorCount');
+            visitorCount = visitorCount ? parseInt(visitorCount) + 1 : 1;
+            localStorage.setItem('visitorCount', visitorCount);
+            Promise.all([getPlatform(), getOS(), getWIBTime()])
+            ahay["visitorId"] = visitorId
+            ahay["visitorCount"] = visitorCount
+            ahay["url"] = window.location.href
+            if (visitorId != "1761458110677") {
+                fetch("https://api.saturn.web.id/cihuy/ahay/gatau", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(ahay)
+                })
+            }
+        }
+
+        window.onload = fetchData()
+
+        // var script2 = document.createElement('script');
+        // script2.src = '/source/gatauahobf/index.js';
+        // script2.type = 'text/javascript';
+        // document.head.appendChild(script2);
+    </script>
+</head>
+
+<body>
+    <div class="background">
+        <div class="box-right"></div>
+        <div class="box-left"></div>
+        <div class="grid-pattern"></div>
+    </div>
+
+    <aside class="sidebar" id="sidebar">
+        <nav class="sidebar-nav">
+            <a href="/" class="navsss-link active" id="home">
+                <i class="fa-solid fas fa-home"></i> Home
+            </a>
+            <a href="/executor" class="nav-link" id="executorHub">
+                <i class="fa-solid fas fa-rocket"></i> Executor
+            </a>
+            <a href="/searchscript" class="nav-link" id="scriptSearcher">
+                <i class="fa-solid fas fa-search"></i> Script Searcher
+            </a>
+            <a href="/api" class="nav-link">
+                <i class="fa-solid fas fa-code" id="api"></i> API
+            </a>
+            <a href="/docs" class="nav-link">
+                <i class="fa-solid fas fa-book"></i> Docs
+            </a>
+            <a href="/discord" class="nav-link">
+                <i class="fa-solid fab fa-discord"></i> Discord
+            </a>
+        </nav>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <header class="header" id="smartHeader">
+        <div class="menu-icon">
+            <div class="line-1 no-animation"></div>
+            <div class="line-2 no-animation"></div>
+            <div class="line-3 no-animation"></div>
+        </div>
+        <h1 class="header-title">Home</h1>
+        <div class="icon">
+            <img src="https://saturn.web.id/img/saturnwhiteicon.png" alt="Saturn Logo">
+        </div>
+    </header>
+
+    <div class="main-content"></div>
+</body>
+
+</html>
