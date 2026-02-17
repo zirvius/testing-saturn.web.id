@@ -1,17 +1,13 @@
-<!-- Using Scriptblox (scriptblox.com) API -->
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced Search</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet"
-        href="https://saturn.web.id/testing/source/style/backbotside.css">
-    <link rel="stylesheet"
-        href="https://saturn.web.id/testing/source/style/headerGlobal.css">
+    <link rel="stylesheet" href="https://saturn.web.id/testing/source/style/backbotside.css">
+    <link rel="stylesheet" href="https://saturn.web.id/testing/source/style/headerGlobal.css">
     <script src="https://saturn.web.id/testing/source/script/backbotside.js"></script>
     <style>
         /* IMPORT FONTS */
@@ -31,7 +27,8 @@
 
         /* MAIN CONTAINER */
         .container {
-            width: 750px;
+            width: 100%;
+            max-width: 750px;
             padding: 40px;
             border-radius: 18px;
             background: rgba(19, 19, 39, 0.6);
@@ -41,6 +38,7 @@
             display: flex;
             flex-direction: column;
             gap: 30px;
+            box-sizing: border-box; 
         }
 
         /* SEARCH BAR STYLES */
@@ -67,6 +65,7 @@
             color: white;
             outline: none;
             font-size: 14px;
+            min-width: 0; /
         }
 
         .search-btn {
@@ -79,6 +78,7 @@
             cursor: pointer;
             margin-left: 8px;
             transition: 0.25s;
+            white-space: nowrap; 
         }
 
         .search-btn:hover {
@@ -192,6 +192,7 @@
             align-items: center;
             gap: 20px;
             font-size: 14px;
+            flex-wrap: wrap;
         }
 
         /* CUSTOM SELECT DROPDOWN */
@@ -236,6 +237,8 @@
             pointer-events: none;
             transition: 0.25s ease;
             z-index: 10;
+            max-height: 200px;
+            overflow-y: auto;
         }
 
         .custom-select.active .select-options {
@@ -342,6 +345,52 @@
             color: #667eea;
             word-break: break-all;
             font-family: monospace;
+        }
+
+        /* RESPONSIVE MEDIA QUERIES (MOBILE & TABLET) */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px; 
+            }
+
+           
+            .input-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .custom-select {
+                width: 100%;
+            }
+
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .search-btn {
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .search-bar {
+                flex-wrap: wrap;
+            }
+            .search-bar input {
+                width: 100%;
+                margin-bottom: 8px;
+                order: 2;
+            }
+            .search-icon {
+                order: 1;
+            }
+            .search-btn {
+                order: 3;
+                width: 100%;
+                margin-left: 0;
+            }
         }
     </style>
 </head>
@@ -700,5 +749,4 @@
         });
     </script>
 </body>
-
 </html>
